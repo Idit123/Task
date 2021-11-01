@@ -1,5 +1,26 @@
-.addPopup{
-    background:rgb(0, 0, 0,0.6);
+.addPopup {
+    background: rgb(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.popup-content {
+    height: 350px;
+    width: 500px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.editPopup {
+    background: rgb(0, 0, 0, 0.6);
     width: 100%;
     height: 100%;
     position: absolute;
@@ -9,7 +30,7 @@
     align-items: center;
 }
 
-.popup-content{
+.editpopup-content {
     height: 350px;
     width: 500px;
     background-color: white;
@@ -18,27 +39,7 @@
     position: relative;
 }
 
-.editPopup{
-    background:rgb(0, 0, 0,0.6);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0%;
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-.editpopup-content{
-    height: 350px;
-    width: 500px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    position: relative;
-}
-
-input{
+input {
     margin: 20px auto;
     display: block;
     width: 50%;
@@ -46,15 +47,15 @@ input{
     border: 1px solid gray;
 }
 
-h2{
+h2 {
     text-align: center;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-.exit{
+.exit {
     position: absolute;
     top: -15px;
     right: -15px;
@@ -64,4 +65,3 @@ a{
     border-radius: 50%;
     text-align: center;
 }
-
