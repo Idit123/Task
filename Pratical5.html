@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <select id="dropdown" style="width: 15%;" onclick="change()" onchange="change()" autocomplete="off">
+       <option value="select" selected="selected">Select</option>
+        <option value="time">Time</option>
+        <option value="temp">Temperature</option>
+      </select>
+    <br>
+    <br>
+    <div class="temperature" id="temp" style="display: none;">
+        <input type="number" onfocus="celtofeh()" onchange="celtofeh()" onkeyup="celtofeh()" id="cel" value="0" autocomplete="off" size="10" autofocus>&nbsp;=&nbsp;
+        <input type="number" onchange="fahtocel()" onkeyup="fahtocel()" id="feh" size="10">
+        <br> &emsp;&emsp; Celcius&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Fahrenheit
+    </div>
+
+    <div class="timeblock" id="time" style="display: none;">
+        <input type="number" onfocus="sectomin()" onchange="sectomin()" onkeyup="sectomin()" id="sec" value="0" autocomplete="off" size="10" autofocus min="0">&nbsp;=&nbsp;
+        <input type="number" onchange="mintosec()" onkeyup="mintosec()" id="min" size="10" min="0">
+        <br> &emsp;&emsp; Second&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Minit
+    </div>
+
+    <script>
+        function change() {
+            var select = document.getElementById('dropdown');
+            var value = select.options[select.selectedIndex].value;
+
+            switch (value) {
+                case 'select':
+                    document.getElementById('time').style.display = 'none';
+                    document.getElementById('temp').style.display = 'none';
+                    break;
+                case 'time':
+                    document.getElementById('time').style.display = 'block';
+                    document.getElementById('temp').style.display = 'none';
+                    break;
+                case 'temp':
+                    document.getElementById('temp').style.display = 'block';
+                    document.getElementById('time').style.display = 'none';
+                    break;
+            }
+        }
+
+        function sectomin() {
+            var minvalue = parseFloat(document.getElementById('sec').value);
+            document.getElementById('min').value = minvalue / 60;
+        }
+
+        function mintosec() {
+            var secvalue = parseFloat(document.getElementById('min').value);
+            document.getElementById('sec').value = secvalue * 60;
+        }
+
+        function celtofeh() {
+            var fahvalue = parseFloat(document.getElementById('cel').value);
+            document.getElementById("feh").value = (fahvalue * 9 / 5) + 32;
+        }
+
+        function fahtocel() {
+            var celvalue = parseFloat(document.getElementById('feh').value);
+            document.getElementById("cel").value = (celvalue - 32) * 5 / 9;
+        }
+    </script>
+</body>
+
+</html>

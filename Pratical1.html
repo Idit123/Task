@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+
+<body>
+    <input type="text" id="textbox" oninput="display()">
+    <p id="demo" style="color :royalblue ;"></p>
+    <script>
+        function display() {
+            var t = document.getElementById("textbox").value;
+            document.getElementById("demo").innerHTML = t;
+        }
+    </script>
+</body>
+
+</html>

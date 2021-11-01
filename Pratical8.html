@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div>
+        <button id="incre" value="incre" onclick="addvalue()">+</button>
+        <input type="text" id="val" value="0" size="1" style="text-align: center;">
+        <button id="decre" value="decre" onclick="minvalue()">-</button>
+    </div>
+</body>
+
+<script>
+    var x = 0;
+
+    document.getElementById('val').value = x;
+
+    function addvalue() {
+        document.getElementById('val').value = ++x;
+    }
+
+    function minvalue() {
+        document.getElementById('val').value = --x;
+    }
+</script>
+
+</html>

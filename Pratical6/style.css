@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    height: 100%;
+}
+
+.circle {
+    margin-left: 10%;
+    height: 80px;
+    width: 80px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 50%;
+}

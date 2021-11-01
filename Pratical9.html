@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <button id="addclone" onclick="addnode()">ADD</button>
+    <br><br>
+    <div id="demo">
+        <button onclick="increment(this)"> + </button>
+        <input type="number" class="inb" id="val" value="0" size="1" style="text-align: center;">
+        <button onclick="decrement(this)"> - </button>
+        <br><br>
+    </div>
+
+    <div id="New"></div>
+
+    <script>
+        document.getElementById('demo').style.display = 'none';
+
+        function addnode() {
+            let node = document.getElementById('demo');
+            let newnode = node.cloneNode(true);
+            document.getElementById('New').appendChild(newnode);
+            document.getElementById('demo').style.display = 'block';
+        }
+
+        function increment(event) {
+            event.parentElement.querySelector(".inb").stepUp();
+        }
+
+
+        function decrement(event) {
+            event.parentElement.querySelector(".inb").stepDown();
+        }
+    </script>
+</body>
+
+</html>

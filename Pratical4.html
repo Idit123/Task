@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h2>Temperature Conversion</h2>
+    <input type="number" onfocus="celtofeh()" onchange="celtofeh()" onkeyup="celtofeh()" id="cel" value="0" autocomplete="off" size="10" autofocus>&nbsp;=&nbsp;
+    <input type="number" onchange="fahtocel()" onkeyup="fahtocel()" id="feh" size="10">
+    <br> &emsp;&emsp; Celcius&emsp;&emsp;&emsp;&emsp;&emsp;fahrenheit
+    <script>
+        function celtofeh() {
+            var fahvalue = parseFloat(document.getElementById('cel').value);
+            document.getElementById("feh").value = (fahvalue * 9 / 5) + 32;
+        }
+
+        function fahtocel() {
+            var celvalue = parseFloat(document.getElementById('feh').value);
+            document.getElementById("cel").value = (celvalue - 32) * 5 / 9;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Calculate Two Textbox Value</h1>
+    <br> Num1: <input type="text" onkeyup="calculate()" id="num1" value="0" autocomplete="off"> &#215 Num2: <input type="text" onkeyup="calculate()" id="num2" value="0" autocomplete="off">
+    <br>
+    <br>
+    <p id="ans"></p>
+
+    <script>
+        function calculate() {
+            var filed1 = parseFloat(document.getElementById("num1").value);
+            var field2 = parseFloat(document.getElementById("num2").value);
+
+            var Result = filed1 * field2;
+            document.getElementById("ans").innerText = "The Answer is:  " + Result;
+        }
+    </script>
+</body>
+
+</html>

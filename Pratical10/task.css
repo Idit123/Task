@@ -1,0 +1,50 @@
+    .buttondiv {
+        width: 100%;
+        display: flex;
+        justify-content: left;
+        align-items: left;
+    }
+    
+    .btnadd {
+        margin-bottom: 10px;
+        border: 2px solid;
+        background-color: white;
+        padding: 4px 8px;
+        font-size: 16px;
+    }
+    
+    .btnremove {
+        margin-bottom: 10px;
+        border: 2px solid;
+        background-color: white;
+        padding: 4px 8px;
+        font-size: 16px;
+    }
+    
+    .btnsubmit {
+        margin-top: 10px;
+        border: 2px solid;
+        background-color: white;
+        padding: 4px 8px;
+        font-size: 16px;
+    }
+    
+    .btncancel {
+        margin-left: 10px;
+        margin-top: 10px;
+        border: 2px solid;
+        background-color: white;
+        padding: 4px 8px;
+        font-size: 16px;
+    }
+    
+    input {
+        block-size: 20px;
+        margin-right: 15px;
+        margin-left: 5px;
+        width: 100px;
+    }
+    
+    .duplicate {
+        text-align: left;
+    }

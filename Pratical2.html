@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <p id="demo">
+        Javascript Element Hide and show.
+    </p>
+
+    <script>
+        document.getElementById("demo").style.display = "none";
+
+        function myShowFunction() {
+            var x = document.getElementById("demo");
+            x.style.display = "block";
+        }
+
+        function myHideFunction() {
+            var x = document.getElementById("demo");
+            x.style.display = "none";
+        }
+    </script>
+
+    <button onclick="myShowFunction()">Show</button>
+    <button onclick="myHideFunction()">Hide</button>
+
+
+</body>
+
+</html>
