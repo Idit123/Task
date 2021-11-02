@@ -7,7 +7,7 @@ if (isset($_POST['delete'])) {
     $sql = "DELETE FROM users where users.id = '$userid'";
     if (mysqli_query($conn, $sql)) {
         $success  =   "Delete record successfully !";
-        header("Location: http://localhost/idit/Pratical11/index.php");
+        header("Location: http://localhost/Task/Pratical11/index.php");
     } else {
         echo "Error: " . $sql . " " . mysqli_error($conn);
     }

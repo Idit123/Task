@@ -13,7 +13,7 @@ if (isset($_POST['add'])) {
         VALUES ('$username','$useremail','$password','$option')";
     if (mysqli_query($conn, $sql)) {
         $success    =   "New record created successfully !";
-        header("Location: http://localhost/idit/Pratical11/index.php");
+        header("Location: http://localhost/Task/Pratical11/index.php");
     } else {
         echo "Error: " . $sql . " " . mysqli_error($conn);
     }

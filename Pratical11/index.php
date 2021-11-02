@@ -19,16 +19,6 @@
 		<div class="table-wrapper">
 			<div class="table-title">
 				<div class="row">
-					<!-- <div class="title">
-						<h2> <b>User Details</b></h2>
-					</div>
-					<div class="btnsearch">
-						<input type="text" id="search" class='form-control' onload="setFocusToSearchBox()" placeholder="Search By Name">
-					</div>
-					<div class="btndelete">
-						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><span>Delete</span></a>
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><span>Add User</span></a>
-					</div> -->
 					<div class="col-one">
 						<h2><b>User Details</b></h2>
 					</div>
@@ -50,9 +40,9 @@
 								<label for="selectAll"></label>
 							</span>
 						</th>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Password</th>
+						<th><a style="text-decoration:none; color:black" href="?column=usename&order=<?php echo $order ?>"> Name <i class="fa fa-sort"></i> </a></th>
+						<th><a style="text-decoration:none; color:black" href="?column=useremail&order=<?php echo $order ?>"> Email <i class="fa fa-sort"></i> </a></th>
+						<th><a style="text-decoration:none; color:black" href="?column=userpassword&order=<?php echo $order ?>"> Password <i class="fa fa-sort"></i> </a></th>
 						<th>Rights</th>
 						<th>Edit</th>
 						<th>Delete</th>
@@ -147,7 +137,6 @@
 			</div>
 			</form>
 		</div>
-	</div>
 	</div>
 	<!-- Edit Modal HTML -->
 	<div id="editEmployeeModal" class="modal fade">
