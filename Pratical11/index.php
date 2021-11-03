@@ -8,12 +8,11 @@
 	<title>Pratical 11</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-5/css/all.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
 	<link rel="stylesheet" href="task11.css">
 </head>
 
 <body>
-	<br>
-	<br>
 	<h3 class="text-center text-success" id="message"></h3>
 	<div class="container">
 		<div class="table-wrapper">
@@ -79,8 +78,25 @@
 					mysqli_close($conn);
 					?>
 				</tbody>
+				<div class="" >
+					<form action="" method="GET">
+						<label> Show Rows : </label>
+						<input type="hidden" name="page" value="<?php echo isset($_GET['page']) ? $_GET['page'] : 1 ?>" />
+						<select name="selectLimit" onchange="this.form.submit();">
+							<?php
+							foreach ([5, 10, 25, 50] as $selected) {
+							?>
+								<option <?php if (isset($_REQUEST['selectLimit']) && $_REQUEST['selectLimit'] ==  $selected) echo "selected" ?> value="<?php echo $selected ?>"> <?php echo $selected ?> </option>
+							<?php
+							}
+	
+							?>
+						</select>
+					</form>
+				</div>
 			</table>
-			<div class="clearfix">
+
+			<!-- <div class="clearfix">
 				<div class="hint-text">Showing <b>5</b> out of <b>5</b> entries</div>
 				<ul class="pagination">
 					<li class="page-item disabled"><a href="#">Previous</a></li>
@@ -89,7 +105,7 @@
 					<li class="page-item"><a href="#" class="page-link">3</a></li>
 					<li class="page-item"><a href="#" class="page-link">Next</a></li>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<!-- Add Modal HTML -->
