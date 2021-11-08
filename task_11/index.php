@@ -139,9 +139,6 @@
 
     include "connection.php";
 
-
-
-
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $num_per_page = isset($_REQUEST['showrow']) ? $_REQUEST['showrow'] : 5;
     $start_from = ($page - 1) * $num_per_page;
@@ -159,14 +156,11 @@
         }
     }
 
-
-
     if (isset($_GET['order'])) {
         $order = $_GET['order'];
     } else {
         $order = 'username';
     }
-
 
     if (isset($_GET['sort'])) {
         $sort = $_GET['sort'];
@@ -174,14 +168,11 @@
         $sort = 'ASC';
     }
 
-
     $query .= "  ORDER BY $order $sort";
 
     $query .= " limit $start_from,$num_per_page";
 
     $result = mysqli_query($conn, $query);
-
-
 
     if (mysqli_num_rows($result) > 0) {
 
