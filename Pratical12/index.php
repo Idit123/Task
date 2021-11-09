@@ -35,9 +35,8 @@
 						</div>
 					</div>
 					<div class="col-three">
-						<!-- <input id="myInput" type="search" placeholder="Search" name="searchbox" aria-label="Search" onchange="this.form.submit();"> -->
 						<form action="" method="GET">
-							<input type="search" id="search" name="searchbox" class='form-control' placeholder="Search By Name" onchange="this.form.submit();">
+							<input type="search" id="search" name="searchbox" class='form-control' placeholder="Search By Name" onchange="submit();">
 						</form>
 						<form action="deletedata.php" method="POST">
 							<button type="delete" disabled id="maindelete" name="maindelete" class="btn btn-danger" onclick="checkmaindel()">Delete</button>
@@ -46,115 +45,9 @@
 					</div>
 				</div>
 			</div>
+			<!-- Table Data -->
+			<?php include 'pagination.php'; ?>
 
-			<?php
-			include "db_connection.php";
-
-			$page = isset($_GET['page']) ? $_GET['page'] : 1;
-			$num_per_page = isset($_REQUEST['showrow']) ? $_REQUEST['showrow'] : 5;
-			$start_from = ($page - 1) * $num_per_page;
-			$query = "SELECT * FROM users";
-
-			if (isset($_GET['searchbox'])) {
-				if ($_GET['searchbox']) {
-
-					$search = $_GET['searchbox'];
-					$query .= "and username like '%$search%'";
-				} else {
-
-					echo "<p>No Recored found </p>";
-				}
-			}
-
-			if (isset($_GET['order'])) {
-				$order = $_GET['order'];
-			} else {
-				$order = 'username';
-			}
-
-			if (isset($_GET['sort'])) {
-				$sort = $_GET['sort'];
-			} else {
-				$sort = 'ASC';
-			}
-
-			$query .= "  ORDER BY $order $sort";
-
-			$query .= " limit $start_from,$num_per_page";
-
-			$result = mysqli_query($conn, $query);
-			if (mysqli_num_rows($result) > 0) {
-
-				$sort == 'DESC' ? $sort = 'ASC' : $sort = 'DESC ';
-				echo "
-		<table class='table table-striped table-hover'>
-			<thead>
-				<tr>
-				<th>
-					<span class='custom-checkbox'>
-						<input type='checkbox' id='selectAll' onclick='checkmain()'>
-						<label for='selectAll'></label>
-					</span>
-				</th>
-				<th><a href='?order=username&&sort=$sort'> Name<i class='fas fa-sort'></a></th>
-				<th><a href='?order=useremail&&sort=$sort'> Email<i class='fas fa-sort'></a></th>
-				<th>Password</th>
-				<th><a href='?order=userrights&&sort=$sort'>Rights<i class='fas fa-sort'></a></th>
-				<th>Edit</th>
-				<th>Delete</th>
-				</tr>
-			</thead>
-			<tbody>";
-
-				// output data of each row
-				while ($row = mysqli_fetch_assoc($result)) {
-					echo "
-			<tr id='" . $row['id'] . "' data-Username='" . $row["username"] . "' data-Email='" . $row['useremail'] . "' data-Password='" . $row['userpassword'] . "' data-Rights='" . $row['userrights'] . "'>
-				<td>
-					<span class='custom-checkbox'>
-						<input type='checkbox' id='checkbox1' name='options[]' onchange='check(this)' value='" . $row['id'] . "'>
-						<label for='checkbox1'></label>
-					</span>
-				</td>
-				<td>" . $row['username'] . "</td>											
-				<td>" . $row['useremail'] . "</td>
-				<td>" . $row['userpassword'] . "</td>
-				<td>" . $row['userrights'] . "</td>
-				<td>
-					<a href='#editEmployeeModal' class='edit' data-toggle='modal' onclick='edit(" . $row['id'] . ")'><i class='fas fa-edit' data-toggle='tooltip' title='Edit'></i></a>
-				</td>
-				<td>
-					<a href='#deleteEmployeeModal' class='delete' data-toggle='modal' onclick='dele(" . $row['id'] . ")'><i class='far fa-trash-alt' data-toggle='tooltip' title='Delete'></i></a>
-				</td>
-			</tr>";
-				}
-				echo "</tbody></table>";
-			}
-
-			$query_pr = "select * from users";
-			$pr_result = mysqli_query($conn, $query_pr);
-			$totralresult = mysqli_num_rows($pr_result);
-			$totalpage = ceil($totralresult / $num_per_page);
-			//echo $totalpage;
-
-			// preview button 
-			if ($page > 1) { ?>
-				<a href="index.php?page=<?php echo $page - 1; ?>&showrow=<?php echo $num_per_page ?>" class="btn btn-dark"><?php echo "Preview"; ?> </a>
-			<?php
-			}
-
-			for ($i = 1; $i <= $totalpage; $i++) { ?>
-				<a href="index.php?page=<?php echo $i; ?>&showrow=<?php echo $num_per_page ?>" class="btn btn-dark"><?php echo $i; ?> </a>
-			<?php
-			}
-			// next button 
-			if ($i - 1 > $page) { ?>
-				<a href="index.php?page=<?php echo $page + 1; ?>&showrow=<?php echo $num_per_page ?>" class="btn btn-dark"><?php echo "Next"; ?> </a>
-			<?php
-			}
-			echo "</div>
-			</div>";
-			?>
 			<!-- Add Modal HTML -->
 			<div id="addEmployeeModal" class="modal fade">
 				<div class="modal-dialog">

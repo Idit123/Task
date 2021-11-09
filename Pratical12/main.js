@@ -35,9 +35,9 @@ function dele(id) {
     document.getElementById('delid').value = userid;
 }
 
-function setFocusToSearchBox() {
-    document.getElementById("search").focus();
-}
+// function setFocusToSearchBox() {
+//     document.getElementById("search").focus();
+// }
 
 let data = [];
 
