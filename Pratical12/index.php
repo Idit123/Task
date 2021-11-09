@@ -5,11 +5,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Pratical 11</title>
+	<title>Pratical 12</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-5/css/all.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
-	<link rel="stylesheet" href="task11.css">
+	<link rel="stylesheet" href="task12.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
 							<form method="GET" action="">
 								<label class="showrowlabel">Show Rows : </label>
 								<select name="showrow" id="showrow" onchange="this.form.submit();">
-									<?php foreach ([5, 10, 15, 20] as  $num_per_page) : ?>
+									<?php foreach ([5, 10, 25, 50, 100] as  $num_per_page) : ?>
 										<option <?php if (isset($_REQUEST["showrow"]) && $_REQUEST["showrow"] ==  $num_per_page) echo "selected" ?> value="<?= $num_per_page; ?>"><?= $num_per_page; ?></option> entity
 									<?php endforeach; ?>
 								</select>
@@ -36,9 +36,12 @@
 					</div>
 					<div class="col-three">
 						<!-- <input id="myInput" type="search" placeholder="Search" name="searchbox" aria-label="Search" onchange="this.form.submit();"> -->
-						<input type="text" id="search" name="search" class='form-control' placeholder="Search By Name" onchange="this.form.submit();">
-						<input type="hidden" name="deleted_id" id="deleted_id">
-						<button  type="delete" id="maindelete" name="maindelete" class="btn btn-danger" data-toggle="modal" data-target="#deleteEmployeeModal">Delete</button>
+						<form action="" method="GET">
+							<input type="search" id="search" name="searchbox" class='form-control' placeholder="Search By Name" onchange="this.form.submit();">
+						</form>
+						<form action="deletedata.php" method="POST">
+							<button type="delete" disabled id="maindelete" name="maindelete" class="btn btn-danger" onclick="checkmaindel()">Delete</button>
+						</form>
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><span>Add User</span></a>
 					</div>
 				</div>
@@ -52,11 +55,10 @@
 			$start_from = ($page - 1) * $num_per_page;
 			$query = "SELECT * FROM users";
 
-			if (isset($_GET['search'])) {
-				if ($_GET['search']) {
+			if (isset($_GET['searchbox'])) {
+				if ($_GET['searchbox']) {
 
-					$search = $_GET['search'];
-					print_r($search);
+					$search = $_GET['searchbox'];
 					$query .= "and username like '%$search%'";
 				} else {
 
@@ -81,11 +83,9 @@
 			$query .= " limit $start_from,$num_per_page";
 
 			$result = mysqli_query($conn, $query);
-
 			if (mysqli_num_rows($result) > 0) {
 
 				$sort == 'DESC' ? $sort = 'ASC' : $sort = 'DESC ';
-
 				echo "
 		<table class='table table-striped table-hover'>
 			<thead>
@@ -98,8 +98,8 @@
 				</th>
 				<th><a href='?order=username&&sort=$sort'> Name<i class='fas fa-sort'></a></th>
 				<th><a href='?order=useremail&&sort=$sort'> Email<i class='fas fa-sort'></a></th>
-				<th><a href='?order=userpassword&&sort=$sort'> Password<i class='fas fa-sort'></a></th>
-				<th>Rights</th>
+				<th>Password</th>
+				<th><a href='?order=userrights&&sort=$sort'>Rights<i class='fas fa-sort'></a></th>
 				<th>Edit</th>
 				<th>Delete</th>
 				</tr>
@@ -109,11 +109,10 @@
 				// output data of each row
 				while ($row = mysqli_fetch_assoc($result)) {
 					echo "
-		
 			<tr id='" . $row['id'] . "' data-Username='" . $row["username"] . "' data-Email='" . $row['useremail'] . "' data-Password='" . $row['userpassword'] . "' data-Rights='" . $row['userrights'] . "'>
 				<td>
 					<span class='custom-checkbox'>
-						<input type='checkbox' id='checkbox1' value='' name='options[]' onclick='check(".$row['id'].")'>
+						<input type='checkbox' id='checkbox1' name='options[]' onchange='check(this)' value='" . $row['id'] . "'>
 						<label for='checkbox1'></label>
 					</span>
 				</td>
@@ -140,17 +139,17 @@
 
 			// preview button 
 			if ($page > 1) { ?>
-				<a href="index.php?page=<?php echo $page - 1; ?>&showrow=<?php echo $num_per_page ?>" class="btn btn-primary"><?php echo "preview"; ?> </a>
+				<a href="index.php?page=<?php echo $page - 1; ?>&showrow=<?php echo $num_per_page ?>" class="btn btn-dark"><?php echo "Preview"; ?> </a>
 			<?php
 			}
 
 			for ($i = 1; $i <= $totalpage; $i++) { ?>
-				<a href="index.php?page=<?php echo $i; ?>&showrow=<?php echo $num_per_page ?>" class="btn btn-primary"><?php echo $i; ?> </a>
+				<a href="index.php?page=<?php echo $i; ?>&showrow=<?php echo $num_per_page ?>" class="btn btn-dark"><?php echo $i; ?> </a>
 			<?php
 			}
 			// next button 
 			if ($i - 1 > $page) { ?>
-				<a href="index.php?page=<?php echo $page + 1; ?>&showrow=<?php echo $num_per_page ?>" class="btn btn-primary"><?php echo "next"; ?> </a>
+				<a href="index.php?page=<?php echo $page + 1; ?>&showrow=<?php echo $num_per_page ?>" class="btn btn-dark"><?php echo "Next"; ?> </a>
 			<?php
 			}
 			echo "</div>

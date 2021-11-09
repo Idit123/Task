@@ -39,38 +39,38 @@ function setFocusToSearchBox() {
     document.getElementById("search").focus();
 }
 
+let data = [];
+
 function checkmain() {
     var main = document.getElementById('selectAll');
     var check = document.querySelectorAll("input[name='options[]']");
+
     if (main.checked) {
         for (i = 0; i < check.length; i++) {
             check[i].checked = true;
+            var x = check[i].value;
+            data.push(x);
         }
+        document.getElementById('maindelete').disabled = false;
     } else {
         for (i = 0; i < check.length; i++) {
             check[i].checked = false;
+            data.length = 0;
         }
+        document.getElementById('maindelete').disabled = true;
     }
+    console.log(data.join())
+    document.getElementById('maindelete').value = data.join();
 }
-let data = [];
 
-function check(id) {
-
-    var tr = document.getElementById(id);
-    var td = tr.firstElementChild;
-    var span = td.firstElementChild;
-    var input = span.firstElementChild;
-    if (input.checked) {
-        data.push(id);
-        data.join();
-    } else {
-        for (var i = 0; i < data.length; i++) {
-
-            if (data[i] === id) {
-
-                data.splice(i, 1);
-            }
-        }
+function check(e) {
+    if (e.checked) {
+        data.push(e.value);
+        document.getElementById('maindelete').disabled = false;
+    } else if (!e.checked) {
+        data.splice(data.indexOf(e.value), 1);
+        document.getElementById('maindelete').disabled = true;
     }
-    document.getElementById('deleted_id').value = data.join();
+    console.log(data.join())
+    document.getElementById('maindelete').value = data.join();
 }
