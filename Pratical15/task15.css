@@ -1,0 +1,62 @@
+body {
+    color: #000000;
+    background: #f3f3f3;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 15px;
+}
+
+.table-wrapper {
+    background: #fff;
+    padding: 20px 25px;
+    width: 100%;
+    margin: 30px 0;
+    border-radius: 1px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.247);
+}
+
+.table-title .row {
+    width: 100%;
+    display: flex;
+    padding: 10px;
+}
+
+.table-title .row .col-one {
+    width: 60%;
+    margin-left: 5px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.table-title .row .col-two {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.table-title .col-two a {
+    font-size: 18px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+}
+
+.table td a {
+    color: black;
+}
+
+.table td div {
+    text-align: center;
+}
+
+.table td a.edit:hover {
+    color: #2196F3;
+}
+
+.table td a.delete:hover {
+    color: red;
+}
+
+.table td i {
+    font-size: 18px;
+}
