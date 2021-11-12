@@ -1,0 +1,28 @@
+.select {
+    text-align: center;
+    padding-top: 100px;
+}
+
+.singleselect {
+    padding: 20px;
+}
+
+.multiselect {
+    padding: 20px;
+}
+
+label {
+    font-size: 20px;
+}
+
+span {
+    font-size: 18px;
+    color: black !important;
+}
+
+.button button {
+    cursor: pointer;
+    margin: 15px 5px;
+    font-size: 17px;
+    padding: 5px;
+}

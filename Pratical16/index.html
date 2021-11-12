@@ -7,23 +7,173 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pratical 16</title>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="task16.css">
 </head>
 
 <body>
-    <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-        <option value="AL">Alabama1</option>
-        <option value="AL">Alabama2</option>
-        <option value="AL">Alabama3</option>
-        <option value="AL">Alabama4</option>
-        <option value="AL">Alabama5</option>
-        <option value="AL">Alabama6</option>
-        <option value="45">Wyoming7</option>
-    </select>
+    <div class="select">
+        <div class="singleselect">
+            <div class="button">
+                <button class="set">Set "California"</button>
+                <button class="open">Open</button>
+                <button class="close">Close</button>
+                <button class="init">Init</button>
+                <button class="destroy">Destroy</button>
+            </div>
+            <br>
+            <label for="country">Choose a country:</label>
+            <select name="country" id="country" class="js-example-basic-single" style="width: 55%;height: 35px;">
+                <optgroup label="Alaskan/Hawaiian Time Zone">
+                    <option value="Alaska">Alaska</option>
+                    <option value="Hawaii">Hawaii</option>
+                </optgroup>
+                <optgroup label="Pacific Time Zone">
+                    <option value="California">California</option>
+                    <option value="Nevada">Nevada</option>
+                    <option value="Oregon">Oregon</option>
+                    <option value="Washington">Washington</option>
+                </optgroup>
+                <optgroup label="Mountain Time Zone">
+                    <option value="Arizona">Arizona</option>
+                    <option value="Colorado">Colorado</option>
+                    <option value="Idaho">Idaho</option>
+                    <option value="Montana">Montana</option>
+                    <option value="Nebraska">Nebraska</option>
+                    <option value="New Mexico">New Mexico</option>
+                    <option value="North Dakota">North Dakota</option>
+                    <option value="Utah">Utah</option>
+                    <option value="Wyoming">Wyoming</option>
+                </optgroup>
+                <optgroup label="Central Time Zone">
+                    <option value="Alabama">Alabama</option>
+                    <option value="Arkansas">Arkansas</option>
+                    <option value="Illinois">Illinois</option>
+                    <option value="Iowa">Iowa</option>
+                    <option value="Louisiana">Louisiana</option>
+                    <option value="Minnesota">Minnesota</option>
+                    <option value="Mississippi">Mississippi</option>
+                    <option value="Missouri">Missouri</option>
+                    <option value="Oklahoma">Oklahoma</option>
+                    <option value="Wisconsin">Wisconsin</option>
+                    <option value="Texas">Texas</option>
+                </optgroup>
+                <optgroup label="Eastern Time Zone">
+                    <option value="Connecticut">Connecticut</option>
+                    <option value="Delaware">Delaware</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Maine">Maine</option>
+                    <option value="Maryland">Maryland</option>
+                    <option value="New Jersey">New Jersey</option>
+                    <option value="New York">New York</option>
+                    <option value="Virginia">Virginia</option>
+                    <option value="Pennsylvania">Pennsylvania</option>
+                    <option value="Florida">Florida</option>
+                    <option value="Rhode Island">Rhode Island</option>
+                </optgroup>
+            </select>
+        </div>
 
+        <div class="multiselect">
+
+            <label for="country1">Choose a country:</label>
+            <select name="country1[]" id="country1" class="js-example-basic-multiple" style="width: 55%;height: 35px;" multiple="multiple">
+                <optgroup label="Alaskan/Hawaiian Time Zone">
+                    <option value="Alaska">Alaska</option>
+                    <option value="Hawaii">Hawaii</option>
+                </optgroup>
+                <optgroup label="Pacific Time Zone">
+                    <option value="California">California</option>
+                    <option value="Nevada">Nevada</option>
+                    <option value="Oregon">Oregon</option>
+                    <option value="Washington">Washington</option>
+                </optgroup>
+                <optgroup label="Mountain Time Zone">
+                    <option value="Arizona">Arizona</option>
+                    <option value="Colorado">Colorado</option>
+                    <option value="Idaho">Idaho</option>
+                    <option value="Montana">Montana</option>
+                    <option value="Nebraska">Nebraska</option>
+                    <option value="New Mexico">New Mexico</option>
+                    <option value="North Dakota">North Dakota</option>
+                    <option value="Utah">Utah</option>
+                    <option value="Wyoming">Wyoming</option>
+                </optgroup>
+                <optgroup label="Central Time Zone">
+                    <option value="Alabama">Alabama</option>
+                    <option value="Arkansas">Arkansas</option>
+                    <option value="Illinois">Illinois</option>
+                    <option value="Iowa">Iowa</option>
+                    <option value="Louisiana">Louisiana</option>
+                    <option value="Minnesota">Minnesota</option>
+                    <option value="Mississippi">Mississippi</option>
+                    <option value="Missouri">Missouri</option>
+                    <option value="Oklahoma">Oklahoma</option>
+                    <option value="Wisconsin">Wisconsin</option>
+                    <option value="Texas">Texas</option>
+                </optgroup>
+                <optgroup label="Eastern Time Zone">
+                    <option value="Connecticut">Connecticut</option>
+                    <option value="Delaware">Delaware</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Maine">Maine</option>
+                    <option value="Maryland">Maryland</option>
+                    <option value="New Jersey">New Jersey</option>
+                    <option value="New York">New York</option>
+                    <option value="Virginia">Virginia</option>
+                    <option value="Pennsylvania">Pennsylvania</option>
+                    <option value="Florida">Florida</option>
+                    <option value="Rhode Island">Rhode Island</option>
+                </optgroup>
+            </select>
+            <br>
+            <div class="button">
+                <button class="set1">Set to California and Alabama</button>
+                <button class="clear">Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+        // single
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+        var $example = $(".js-example-basic-single").select2();
+
+        $(".set").on("click", function() {
+            $example.val("California").trigger("change");
+        });
+
+        $(".open").on("click", function() {
+            $example.select2("open");
+        });
+
+        $(".close").on("click", function() {
+            $example.select2("close");
+        });
+
+        $(".init").on("click", function() {
+            $example.select2();
+        });
+
+        $(".destroy").on("click", function() {
+            $example.select2("destroy");
+        });
+
+        // multiple
         $(document).ready(function() {
             $('.js-example-basic-multiple').select2();
+        });
+        var $exampleMulti = $(".js-example-basic-multiple").select2();
+
+        $(".set1").on("click", function() {
+            $exampleMulti.val(["California", "Alabama"]).trigger("change");
+        });
+
+        $(".clear").on("click", function() {
+            $exampleMulti.val(null).trigger("change");
         });
     </script>
 </body>
