@@ -55,6 +55,7 @@ label {
     border: 1px solid #ccc;
     cursor: move;
     margin-bottom: 10px;
+    text-align: left;
 }
 
 #item li.ui-state-highlight {
@@ -69,6 +70,7 @@ label {
     border: 1px solid #ccc;
     cursor: move;
     margin-bottom: 10px;
+    text-align: left;
 }
 
 #item_selected li.ui-state-highlight {

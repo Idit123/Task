@@ -19,14 +19,20 @@
         <h2 style="text-align: center;">Item Draggable and Sortable</h2>
         <label for="text">State:</label>
         <select name="state" id="state">
-            <option value="Gujarat">Gujarat</option>
-            <option value="California">California</option>
-            <option value="Nevada">Nevada</option>
-            <option value="Oregon">Oregon</option>
-            <option value="Washington">Washington</option>
+            <option style="text-align: center;" value="0">--- Select Country ---</option>
+            <?php
+            include 'db_connection.php';
+            $result = mysqli_query($conn, "SELECT * FROM states");
+            while ($row = mysqli_fetch_array($result)) {
+            ?>
+                <option value="<?php echo $row['id']; ?>"><?php echo $row["name"]; ?></option>
+            <?php
+            }
+            ?>
         </select>
         <div class="row">
             <div class="col-one">
+                <input type="hidden" id="state_id" name="state_id">
                 <label for="text">Parties:</label>
             </div>
             <div class="col-two">
@@ -34,10 +40,17 @@
                 <ul class="list-unstyled" id="item">
                     <?php
                     include 'db_connection.php';
-                    $query = "SELECT * FROM item ORDER BY item_order ASC";
+
+                    $query = "SELECT item_id FROM states WHERE id = '" . $_POST['stateid'] . "'";
                     $result = mysqli_query($conn, $query);
+
                     while ($row = mysqli_fetch_array($result)) {
-                        echo '<li  id="' . $row["item_id"] . '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . $row["item_title"] . '</li>';
+                        $query = "SELECT * FROM item WHERE item_id IN (" . $row['item_id'] . ") ORDER BY item_order ASC";
+
+                        $result = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo '<li  id="' . $row["item_id"] . '" value="' . $row["item_title"] . '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . $row["item_title"] . '</li>';
+                        }
                     }
                     ?>
                 </ul>
@@ -45,16 +58,78 @@
             <div class="col-three">
                 <label for="text">Selected Parties</label>
                 <ul class="list-unstyled" id="item_selected">
-              
+                    
                 </ul>
             </div>
         </div>
     </div>
     <script>
         $(document).ready(function() {
+            $("#state").change(function() {
+                var stateid = $(this).val();
+                document.getElementById('state_id').value = stateid;
+                $.ajax({
+                    url: "item.php",
+                    method: "POST",
+                    data: {
+                        stateid: stateid
+                    },
+                    success: function(data) {
+                        document.getElementById('item_selected').innerHTML = data;
+                        console.log('data :>> ', data);
+                    }
+                });
+            });
+            $("ul").sortable({
+                connectWith: "ul",
+                start: function(event, ui) {
+                    ui.item.toggleClass("highlight");
+                },
+                stop: function(event, ui) {
+                    ui.item.toggleClass("highlight");
+                },
+                update: function(event, ui) {
+                    var item_id_array = new Array();
+                    var item_title = new Array();
+                    var item_selected_id_array = new Array();
+                    var item_selected_title = new Array();
 
-            $("#item li").sortable();
-            $("#item_selected").sortable();
+                    $('#item li').each(function() {
+                        item_id_array.push($(this).attr("id"));
+                        item_title.push($(this).attr("value"));
+                    });
+                    $('#item_selected li').each(function() {
+                        item_selected_id_array.push($(this).attr("id"));
+                        console.log('state_item_id :>> ', state_item_id);
+                        item_selected_title.push($(this).attr("value"));
+                    });
+                    $.ajax({
+                        url: "item_update.php",
+                        method: "POST",
+                        data: {
+                            item_id_array: item_id_array,
+                            item_title: item_title
+                        },
+                        success: function(data) {
+                            //alert(data);
+                            console.log('data :>> ', data);
+                        }
+                    });
+                    $.ajax({
+                        url: "item_selected_update.php",
+                        method: "POST",
+                        data: {
+                            item_selected_id_array: item_selected_id_array,
+                            item_selected_title: item_selected_title,
+                            stateid: stateid
+                        },
+                        success: function(data) {
+                            //alert(data);
+                            console.log('data :>> ', data);
+                        }
+                    });
+                }
+            });
         })
     </script>
 </body>
