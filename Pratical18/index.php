@@ -38,27 +38,13 @@
             <div class="col-two">
                 <label for="text">Select Parties</label>
                 <ul class="list-unstyled" id="item">
-                    <?php
-                    include 'db_connection.php';
 
-                    $query = "SELECT item_id FROM states WHERE id = '" . $_POST['stateid'] . "'";
-                    $result = mysqli_query($conn, $query);
-
-                    while ($row = mysqli_fetch_array($result)) {
-                        $query = "SELECT * FROM item WHERE item_id IN (" . $row['item_id'] . ") ORDER BY item_order ASC";
-
-                        $result = mysqli_query($conn, $query);
-                        while ($row = mysqli_fetch_array($result)) {
-                            echo '<li  id="' . $row["item_id"] . '" value="' . $row["item_title"] . '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . $row["item_title"] . '</li>';
-                        }
-                    }
-                    ?>
                 </ul>
             </div>
             <div class="col-three">
                 <label for="text">Selected Parties</label>
                 <ul class="list-unstyled" id="item_selected">
-                    
+
                 </ul>
             </div>
         </div>
@@ -69,14 +55,25 @@
                 var stateid = $(this).val();
                 document.getElementById('state_id').value = stateid;
                 $.ajax({
-                    url: "item.php",
+                    url: "showitem.php",
+                    method: "POST",
+                    data: {
+                        stateid: stateid
+                    },
+                    success: function(data) {
+                        document.getElementById('item').innerHTML = data;
+                        //console.log('data :>> ', data);
+                    }
+                });
+                $.ajax({
+                    url: "showitemselected.php",
                     method: "POST",
                     data: {
                         stateid: stateid
                     },
                     success: function(data) {
                         document.getElementById('item_selected').innerHTML = data;
-                        console.log('data :>> ', data);
+                        //console.log('data :>> ', data);
                     }
                 });
             });
@@ -90,38 +87,21 @@
                 },
                 update: function(event, ui) {
                     var item_id_array = new Array();
-                    var item_title = new Array();
                     var item_selected_id_array = new Array();
-                    var item_selected_title = new Array();
 
                     $('#item li').each(function() {
                         item_id_array.push($(this).attr("id"));
-                        item_title.push($(this).attr("value"));
                     });
                     $('#item_selected li').each(function() {
                         item_selected_id_array.push($(this).attr("id"));
-                        console.log('state_item_id :>> ', state_item_id);
-                        item_selected_title.push($(this).attr("value"));
                     });
                     $.ajax({
                         url: "item_update.php",
                         method: "POST",
                         data: {
                             item_id_array: item_id_array,
-                            item_title: item_title
-                        },
-                        success: function(data) {
-                            //alert(data);
-                            console.log('data :>> ', data);
-                        }
-                    });
-                    $.ajax({
-                        url: "item_selected_update.php",
-                        method: "POST",
-                        data: {
                             item_selected_id_array: item_selected_id_array,
-                            item_selected_title: item_selected_title,
-                            stateid: stateid
+                            stateid: document.getElementById('state_id').value                       
                         },
                         success: function(data) {
                             //alert(data);
